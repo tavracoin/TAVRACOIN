@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>TAVRA COIN ($TAV)</title>
+<meta name="description" content="TAVRA COIN ($TAV) is a community meme coin. Join the whitelist, follow the roadmap. Meme coin, no intrinsic value." />
+<style>
+  :root {
+    --bg: #000;
+    --bg-2: #0a0a0a;
+    --card: #0f0f0f;
+    --line: #1f1f1f;
+    --white: #fff;
+    --muted: #a3a3a3;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a { color: inherit; }
+  img, svg { display: block; max-width: 100%; }
+  .container { width: min(1100px, 92%); margin: 0 auto; }
+
+  /* Nav */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 800; letter-spacing: 1px; }
+  .brand svg { width: 34px; height: 34px; }
+  .nav-links { display: flex; gap: 22px; list-style: none; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.92rem; transition: color .2s; }
+  .nav-links a:hover { color: var(--white); }
+  .menu-btn { display: none; background: none; border: 1px solid var(--line); color: var(--white); padding: 6px 10px; border-radius: 8px; cursor: pointer; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 13px 26px; border-radius: 999px; font-weight: 700; font-size: 0.98rem;
+    border: 2px solid var(--white); text-decoration: none; cursor: pointer;
+    transition: transform .2s, background .2s, color .2s, box-shadow .2s;
+    background: var(--white); color: #000; font-family: inherit;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,255,255,0.18); }
+  .btn-ghost { background: transparent; color: var(--white); }
+  .btn-ghost:hover { background: var(--white); color: #000; }
+  .btn:disabled { opacity: .4; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 120px 0 80px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(circle at 50% 35%, rgba(255,255,255,0.10), transparent 60%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0;
+    background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 60px 60px; opacity: .25; mask-image: radial-gradient(circle at center, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(circle at center, #000 30%, transparent 75%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; }
+  .hero-logo { width: clamp(150px, 26vw, 240px); margin: 0 auto 28px; animation: float 5s ease-in-out infinite; filter: drop-shadow(0 0 30px rgba(255,255,255,0.25)); }
+  .hero h1 { font-size: clamp(2.6rem, 8vw, 5rem); font-weight: 900; letter-spacing: 2px; line-height: 1.05; }
+  .ticker {
+    display: inline-block; margin-top: 14px; padding: 6px 18px; border: 1px solid var(--white); border-radius: 999px;
+    font-weight: 700; letter-spacing: 2px; font-size: 1.1rem;
+  }
+  .tagline { margin: 22px auto 34px; max-width: 560px; color: var(--muted); font-size: 1.12rem; }
+  .hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+  /* Sections */
+  section { padding: 96px 0; position: relative; }
+  section:nth-of-type(even) { background: var(--bg-2); }
+  .eyebrow { color: var(--muted); text-transform: uppercase; letter-spacing: 3px; font-size: .8rem; font-weight: 700; }
+  h2 { font-size: clamp(1.9rem, 4.5vw, 2.8rem); font-weight: 800; margin: 10px 0 18px; letter-spacing: .5px; }
+  .section-head { text-align: center; margin-bottom: 52px; }
+  .section-head p { color: var(--muted); max-width: 620px; margin: 0 auto; }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .about-text p { color: #d4d4d4; margin-bottom: 16px; font-size: 1.04rem; }
+  .stat-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px;
+    transition: transform .3s, border-color .3s;
+  }
+  .stat-card:hover { transform: translateY(-4px); border-color: var(--white); }
+  .stat-card h3 { font-size: 1.05rem; margin-bottom: 6px; }
+  .stat-card p { color: var(--muted); font-size: .95rem; }
+
+  /* Whitelist */
+  .wl-box {
+    max-width: 620px; margin: 0 auto; background: var(--card); border: 1px solid var(--line);
+    border-radius: 22px; padding: 38px 34px;
+  }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: .9rem; font-weight: 600; margin-bottom: 8px; color: #e5e5e5; }
+  .field input {
+    width: 100%; padding: 13px 15px; border-radius: 12px; border: 1px solid #2a2a2a;
+    background: #000; color: var(--white); font: inherit; outline: none; transition: border-color .2s, box-shadow .2s;
+  }
+  .field input:focus { border-color: var(--white); box-shadow: 0 0 0 3px rgba(255,255,255,0.12); }
+  .field .err { color: #f87171; font-size: .82rem; margin-top: 6px; display: none; }
+  .field.invalid .err { display: block; }
+  .field.invalid input { border-color: #f87171; }
+  .wl-box .btn { width: 100%; margin-top: 6px; }
+  .wl-note { color: var(--muted); font-size: .82rem; margin-top: 16px; text-align: center; }
+  .wl-success { display: none; text-align: center; padding: 20px 6px; }
+  .wl-success.show { display: block; animation: pop .5s ease; }
+  .wl-success .check {
+    width: 70px; height: 70px; margin: 0 auto 18px; border-radius: 50%; border: 2px solid var(--white);
+    display: flex; align-items: center; justify-content: center; font-size: 2rem;
+  }
+  .wl-success h3 { font-size: 1.4rem; margin-bottom: 8px; }
+  .wl-success p { color: var(--muted); }
+
+  /* Contract */
+  .ca-box {
+    max-width: 780px; margin: 0 auto; border: 2px dashed #3a3a3a; border-radius: 22px;
+    padding: 40px 30px; text-align: center; background: repeating-linear-gradient(45deg, #050505 0 12px, #0b0b0b 12px 24px);
+  }
+  .badge {
+    display: inline-block; padding: 6px 16px; border-radius: 999px; background: var(--white); color: #000;
+    font-weight: 800; font-size: .8rem; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 18px;
+  }
+  .ca-value {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; word-break: break-all;
+    background: #000; border: 1px solid var(--line); border-radius: 12px; padding: 16px; margin: 18px 0 20px;
+    color: var(--muted); font-size: .95rem;
+  }
+  .ca-value.filled { color: var(--white); border-color: var(--white); }
+  .ca-hint { color: var(--muted); font-size: .88rem; }
+  .copy-msg { min-height: 1.4em; margin-top: 12px; font-size: .9rem; color: var(--white); }
+
+  /* Roadmap */
+  .roadmap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; }
+  .phase {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 26px 22px;
+    transition: transform .3s, border-color .3s; position: relative;
+  }
+  .phase:hover { transform: translateY(-6px); border-color: var(--white); }
+  .phase .num {
+    width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--white);
+    display: flex; align-items: center; justify-content: center; font-weight: 800; margin-bottom: 16px;
+  }
+  .phase h3 { font-size: 1.15rem; margin-bottom: 8px; }
+  .phase p { color: var(--muted); font-size: .94rem; }
+  .phase .when { font-size: .75rem; letter-spacing: 1.5px; text-transform: uppercase; color: #cfcfcf; margin-bottom: 8px; font-weight: 700; }
+
+  /* Footer */
+  footer { border-top: 1px solid var(--line); padding: 56px 0 36px; background: #000; }
+  .foot-grid { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 22px; }
+  .socials { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .socials a {
+    display: inline-flex; align-items: center; gap: 8px; padding: 11px 20px; border-radius: 999px;
+    border: 1px solid #333; text-decoration: none; font-weight: 600; transition: all .25s;
+  }
+  .socials a:hover { background: var(--white); color: #000; border-color: var(--white); }
+  .disclaimer { color: #737373; font-size: .82rem; max-width: 720px; line-height: 1.6; }
+  .copyright { color: #525252; font-size: .8rem; }
+
+  /* Animations */
+  .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+  @keyframes pop { from { transform: scale(.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .roadmap { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 760px) {
+    .nav-links {
+      position: absolute; top: 64px; left: 0; right: 0; flex-direction: column; gap: 0;
+      background: #000; border-bottom: 1px solid var(--line); display: none;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links li a { display: block; padding: 14px 4%; }
+    .menu-btn { display: block; }
+    .about-grid { grid-template-columns: 1fr; }
+    section { padding: 72px 0; }
+  }
+  @media (max-width: 520px) {
+    .roadmap { grid-template-columns: 1fr; }
+    .wl-box, .ca-box { padding: 28px 20px; }
+    .hero-cta .btn { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Reusable logo: white ring, black inside, white bolt-T -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="46" fill="#000" stroke="#fff" stroke-width="5"/>
+      <path d="M24 30 L76 30 L66 40 L56 40 L56 46 L66 46 L46 76 L49 52 L40 52 L36 40 L24 30 Z" fill="#fff" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<nav>
+  <div class="container">
+    <a href="#top" class="brand"><svg><use href="#logo"/></svg><span>TAVRA</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#whitelist">Whitelist</a></li>
+      <li><a href="#contract">Contract</a></li>
+      <li><a href="#roadmap">Roadmap</a></li>
+      <li><a href="#community">Community</a></li>
+    </ul>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">Menu</button>
+  </div>
+</nav>
+
+<!-- 1. HERO -->
+<header class="hero" id="top">
+  <div class="container hero-inner">
+    <svg class="hero-logo" viewBox="0 0 100 100" role="img" aria-label="TAVRA COIN logo"><use href="#logo"/></svg>
+    <h1>TAVRA COIN</h1>
+    <span class="ticker">$TAV</span>
+    <p class="tagline">The community meme coin. Bold on the outside, built by the people who hold it.</p>
+    <div class="hero-cta">
+      <a href="#whitelist" class="btn">Join the Whitelist</a>
+      <a href="#roadmap" class="btn btn-ghost">View Roadmap</a>
+    </div>
+  </div>
+</header>
+
+<!-- 2. ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">About</div>
+      <h2>What is TAVRA COIN?</h2>
+      <p>A fun, community-first meme coin with a simple idea: a loud brand, an active crowd, and a clear plan.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>TAVRA COIN ($TAV) is a meme token built around its community. The brand is simple: a white bolt on black, bold energy, and a crowd that shows up together.</p>
+        <p>The project is early. Our focus is on building a real community first: transparent updates, an airdrop for early supporters, and regular community events.</p>
+        <p>Please remember this is a meme coin. It has no intrinsic value and no guaranteed returns. Only join with money you can afford to lose.</p>
+      </div>
+      <div class="reveal">
+        <div class="stat-card" style="margin-bottom:18px">
+          <h3>Community first</h3>
+          <p>Built by holders, for holders. Ideas, memes and feedback shape what comes next.</p>
+        </div>
+        <div class="stat-card" style="margin-bottom:18px">
+          <h3>Early whitelist</h3>
+          <p>Join the whitelist to be first in line for airdrop and early community perks.</p>
+        </div>
+        <div class="stat-card">
+          <h3>Transparent plan</h3>
+          <p>A public roadmap with clear phases, so you always know what is happening next.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. WHITELIST -->
+<section id="whitelist">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Whitelist</div>
+      <h2>Join the Whitelist</h2>
+      <p>Sign up to get early access updates and airdrop eligibility. Spots are limited.</p>
+    </div>
+    <div class="wl-box reveal" id="wlBox">
+      <form id="wlForm" novalidate>
+        <div class="field" id="fieldName">
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" maxlength="60" autocomplete="name" />
+          <div class="err">Please enter your name.</div>
+        </div>
+        <div class="field" id="fieldWallet">
+          <label for="wallet">Wallet address (optional)</label>
+          <input id="wallet" name="wallet" type="text" placeholder="0x... or your wallet address" maxlength="120" autocomplete="off" />
+          <div class="err">Wallet address looks too short.</div>
+        </div>
+        <div class="field" id="fieldEmail">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" maxlength="120" autocomplete="email" />
+          <div class="err">Please enter a valid email address.</div>
+        </div>
+        <button type="submit" class="btn">Join the Whitelist</button>
+        <p class="wl-note">Your details stay in your browser for now. Nothing is sent to a server.</p>
+      </form>
+      <div class="wl-success" id="wlSuccess">
+        <div class="check">✓</div>
+        <h3>You're on the list!</h3>
+        <p id="successText">Welcome to TAVRA COIN. We will reach out with the next steps.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. CONTRACT ADDRESS -->
+<section id="contract">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Contract Address</div>
+      <h2>$TAV Contract</h2>
+      <p>The official contract address will be published here at launch. Always double-check it before buying.</p>
+    </div>
+    <div class="ca-box reveal">
+      <span class="badge">Coming after launch</span>
+      <div class="ca-value" id="caValue">Contract address will appear here after launch.</div>
+      <button class="btn" id="copyBtn" disabled>Copy Contract Address</button>
+      <div class="copy-msg" id="copyMsg"></div>
+      <p class="ca-hint" style="margin-top:14px">Only trust the address published on this site and our official social channels.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 5. ROADMAP -->
+<section id="roadmap">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Roadmap</div>
+      <h2>Our Plan</h2>
+      <p>Phases may change as the community grows. We will keep you updated on every step.</p>
+    </div>
+    <div class="roadmap">
+      <div class="phase reveal">
+        <div class="num">1</div>
+        <div class="when">Phase 1</div>
+        <h3>Launch</h3>
+        <p>Token launch, contract address published, and community channels go live.</p>
+      </div>
+      <div class="phase reveal">
+        <div class="num">2</div>
+        <div class="when">Phase 2</div>
+        <h3>Airdrop</h3>
+        <p>Whitelisted and active community members receive the airdrop.</p>
+      </div>
+      <div class="phase reveal">
+        <div class="num">3</div>
+        <div class="when">Phase 3</div>
+        <h3>Community Growth</h3>
+        <p>Memes, contests, AMAs and events to grow a strong, active holder base.</p>
+      </div>
+      <div class="phase reveal">
+        <div class="num">4</div>
+        <div class="when">Phase 4</div>
+        <h3>Listings</h3>
+        <p>Pursue listings on additional exchanges and trackers as the community grows.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. FOOTER -->
+<footer id="community">
+  <div class="container foot-grid">
+    <a href="#top" class="brand"><svg><use href="#logo"/></svg><span>TAVRA COIN</span></a>
+    <div class="socials">
+      <a href="https://t.me/tavraofficial" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://x.com/ucetavra" target="_blank" rel="noopener">X / Twitter</a>
+    </div>
+    <p class="disclaimer">
+      Disclaimer: $TAV (TAVRA COIN) is a meme coin for entertainment and community purposes. It has no intrinsic value, no guaranteed returns, and nothing on this site is financial advice. Crypto assets are highly volatile and you may lose all of your money. Do your own research and never invest more than you can afford to lose.
+    </p>
+    <p class="copyright">&copy; 2026 TAVRA COIN. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  /* ====== CONFIG: paste the contract address here after launch ====== */
+  const CONTRACT_ADDRESS = "";
+  /* =================================================================== */
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Contract address
+  const caValue = document.getElementById('caValue');
+  const copyBtn = document.getElementById('copyBtn');
+  const copyMsg = document.getElementById('copyMsg');
+  function applyContract() {
+    const addr = (CONTRACT_ADDRESS || '').trim();
+    if (addr) {
+      caValue.textContent = addr;
+      caValue.classList.add('filled');
+      copyBtn.disabled = false;
+    } else {
+      caValue.textContent = 'Contract address will appear here after launch.';
+      caValue.classList.remove('filled');
+      copyBtn.disabled = true;
+    }
+  }
+  copyBtn.addEventListener('click', async () => {
+    const addr = (CONTRACT_ADDRESS || '').trim();
+    if (!addr) return;
+    try {
+      await navigator.clipboard.writeText(addr);
+    } catch (e) {
+      const ta = document.createElement('textarea');
+      ta.value = addr; document.body.appendChild(ta); ta.select();
+      document.execCommand('copy'); ta.remove();
+    }
+    copyBtn.textContent = 'Copied!';
+    copyMsg.textContent = 'Contract address copied to clipboard.';
+    setTimeout(() => { copyBtn.textContent = 'Copy Contract Address'; copyMsg.textContent = ''; }, 2000);
+  });
+  applyContract();
+
+  // Whitelist form (client-side only)
+  const form = document.getElementById('wlForm');
+  const wlSuccess = document.getElementById('wlSuccess');
+  const wlBox = document.getElementById('wlBox');
+  const successText = document.getElementById('successText');
+  const isEmail = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const wallet = document.getElementById('wallet').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const fName = document.getElementById('fieldName');
+    const fWallet = document.getElementById('fieldWallet');
+    const fEmail = document.getElementById('fieldEmail');
+
+    fName.classList.toggle('invalid', !name);
+    fWallet.classList.toggle('invalid', wallet.length > 0 && wallet.length < 10);
+    fEmail.classList.toggle('invalid', !isEmail(email));
+
+    if (!name || (wallet.length > 0 && wallet.length < 10) || !isEmail(email)) return;
+
+    successText.textContent = `Thanks, ${name}! You're on the TAVRA COIN whitelist. We'll reach out at ${email} with the next steps.`;
+    form.style.display = 'none';
+    wlSuccess.classList.add('show');
+    form.reset();
+  });
+</script>
+</body>
+</html>
